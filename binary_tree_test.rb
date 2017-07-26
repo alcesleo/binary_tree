@@ -18,11 +18,22 @@ class BinaryTreeTest < Minitest::Test
   end
 
   def test_traversal
+    assert_tree [4, 2, 1, 3, 7, 6, 9], @tree
+  end
+
+  def test_invert
+    assert_tree [4, 7, 9, 6, 2, 3, 1], @tree.invert
+    assert_tree [4, 2, 1, 3, 7, 6, 9], @tree
+  end
+
+  private
+
+  def assert_tree(nodes, tree)
     result = []
     visitor = -> (value) { result << value }
 
-    @tree.traverse(visitor)
+    tree.traverse(visitor)
 
-    assert_equal [4, 2, 1, 3, 7, 6, 9], result
+    assert_equal nodes, result
   end
 end

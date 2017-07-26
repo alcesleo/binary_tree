@@ -13,4 +13,10 @@ class Node
     left.traverse(visitor) unless left == :empty
     right.traverse(visitor) unless right == :empty
   end
+
+  def invert
+    Node.new(value,
+             right == :empty ? :empty : right.invert,
+             left == :empty ? :empty : left.invert)
+  end
 end

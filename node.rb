@@ -1,4 +1,6 @@
 class Node
+  include Enumerable
+
   class EmptyNode
     def left; self; end
     def right; self; end
@@ -25,5 +27,9 @@ class Node
 
   def invert
     Node.new(value, right.invert, left.invert)
+  end
+
+  def each(&block)
+    traverse(block)
   end
 end

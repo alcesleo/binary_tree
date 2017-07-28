@@ -26,13 +26,17 @@ class BinaryTreeTest < Minitest::Test
     assert_tree [4, 2, 1, 3, 7, 6, 9], @tree
   end
 
+  def test_breadth_first
+    assert_tree [4, 2, 7, 1, 3, 6, 9], @tree, :breadth_first
+  end
+
   private
 
-  def assert_tree(nodes, tree)
+  def assert_tree(nodes, tree, traversal_method = :traverse)
     result = []
     visitor = -> (value) { result << value }
 
-    tree.traverse(visitor)
+    tree.public_send(traversal_method, visitor)
 
     assert_equal nodes, result
   end

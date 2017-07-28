@@ -17,7 +17,7 @@ class BinaryTreeTest < Minitest::Test
                 Node.new(9)))
   end
 
-  def test_traversal
+  def test_depth_first
     assert_tree [4, 2, 1, 3, 7, 6, 9], @tree
   end
 
@@ -32,7 +32,7 @@ class BinaryTreeTest < Minitest::Test
 
   private
 
-  def assert_tree(nodes, tree, traversal_method = :traverse)
+  def assert_tree(nodes, tree, traversal_method = :depth_first)
     result = []
     visitor = -> (value) { result << value }
 

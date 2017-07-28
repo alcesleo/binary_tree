@@ -3,7 +3,7 @@ class Node
     def left; self; end
     def right; self; end
     def invert; self; end
-    def traverse(_visitor); end
+    def depth_first(_visitor); end
     def _breadth_first(_visitor, _queue); end
   end
 
@@ -18,14 +18,14 @@ class Node
     @right = right
   end
 
-  def traverse(visitor)
-    visitor.call(value)
-    left.traverse(visitor)
-    right.traverse(visitor)
-  end
-
   def invert
     Node.new(value, right.invert, left.invert)
+  end
+
+  def depth_first(visitor)
+    visitor.call(value)
+    left.depth_first(visitor)
+    right.depth_first(visitor)
   end
 
   def breadth_first(visitor)

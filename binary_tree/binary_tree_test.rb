@@ -26,14 +26,14 @@ class BinaryTreeTest < Minitest::Test
     assert_tree [4, 2, 1, 3, 7, 6, 9], @tree
   end
 
-  def test_enumerable
-    assert_equal 9, @tree.max
-    assert_equal [4, 2, 6], @tree.find_all(&:even?)
-  end
-
   private
 
   def assert_tree(nodes, tree)
-    assert_equal nodes, tree.to_a
+    result = []
+    visitor = -> (value) { result << value }
+
+    tree.traverse(visitor)
+
+    assert_equal nodes, result
   end
 end

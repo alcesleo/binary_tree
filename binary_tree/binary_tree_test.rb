@@ -20,6 +20,15 @@ class BinaryTreeTest < Minitest::Test
                    Node.new(7))))
   end
 
+  def test_build_tree
+    result = []
+    visitor = ->(value) { result << value }
+
+    Node.build_tree([*1..9]).traverse_depth_first(visitor)
+
+    assert_equal [1, 2, 3, 4, 5, 6, 7, 8, 9], result
+  end
+
   def test_traverse_depth_first
     result = []
     visitor = ->(value) { result << value }

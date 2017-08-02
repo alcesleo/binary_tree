@@ -9,6 +9,22 @@ class Node
   attr_reader :value, :left, :right
   private :value, :left, :right
 
+  def self.build_tree(values)
+    return EMPTY if values == EMPTY
+
+    left, value, right = split(values)
+
+    Node.new(value, Node.build_tree(left), Node.build_tree(right))
+  end
+
+  def self.split(values)
+    [
+      values.take(values.length / 2),
+      values.fetch(values.length / 2),
+      values.drop(values.length / 2 + 1)
+    ].map { |v| v == [] ? EMPTY : v }
+  end
+
   def initialize(value, left = EMPTY, right = EMPTY)
     @value = value
     @left = left

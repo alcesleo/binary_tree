@@ -29,6 +29,16 @@ class BinaryTreeTest < Minitest::Test
     assert_equal [1, 2, 3, 4, 5, 6, 7, 8, 9], result
   end
 
+  def test_find
+    tree = Node.build_tree([*1..100])
+
+    comparisons = 0
+    assert_equal 35, tree.find { |v| comparisons += 1; v <=> 35 }
+    assert_equal 6, comparisons
+
+    assert_nil tree.find { |v| v <=> 101 }
+  end
+
   def test_traverse_depth_first
     result = []
     visitor = ->(value) { result << value }

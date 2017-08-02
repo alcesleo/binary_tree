@@ -3,6 +3,7 @@ class Node
     def traverse_depth_first(_visitor); end
     def _traverse_breadth_first(_visitor, _queue); end
     def invert; self; end
+    def find; end
   end
   EMPTY = EmptyNode.new
 
@@ -44,6 +45,14 @@ class Node
   def traverse_breadth_first(visitor)
     queue = [self]
     queue.shift._traverse_breadth_first(visitor, queue) until queue.empty?
+  end
+
+  def find(&comparison)
+    case comparison.call(value)
+    when 1 then left.find(&comparison)
+    when 0 then value
+    when -1 then right.find(&comparison)
+    end
   end
 
   protected
